@@ -25,7 +25,7 @@ char *find_excut(const char *cmd)
 	free(path_copy);
 	return (NULL);
 }
-void excutcmd(char **cmd)
+void excutcmd(char **cmd, int running)
 {
 	pid_t pid;
 	int status;
@@ -63,6 +63,6 @@ void excutcmd(char **cmd)
 	}
 	else
 	{
-		error("excut");
+		error(cmd, running);
 	}
 }

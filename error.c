@@ -1,48 +1,43 @@
 #include "shell.h"
-#define MAX_LENGHT 100
 /**
  *
  */
 char *program(void)
 {
-	char procpath[100];
-	/*char pid[10];*/
+	char *progname = NULL;
+	char buffer[BUFFER_SIZE], pid[MAX_NUM], procpath[MAX_LENGHT] = "/proc/";
 	int fp;
-	char progname[1024];
 
-	/*
-	pid_t ppid = getpid();
-	strcat(procpath, "/proc/");
-	_itoa (ppid, pid);
-	printf("%i\n", ppid); 
-	strcat(procpath, pid);
-	strcat(procpath, "/cmdline");
-	printf("\n%s\n", procpath);
-	*/
+	_itoa (getpid(), pid);
+	_strcat(procpath, pid);
+	_strcat(procpath, "/cmdline");
 	
-	snprintf(procpath, 100, "/proc/%d/cmdline", getpid());
 	fp = open(procpath, O_RDONLY);
 	if (fp != -1)
 	{
-		int nb = read(fp, progname, sizeof(progname));
+		int nb = read(fp, buffer, sizeof(progname));
 		if (nb != -1)
 		{
-			char *ptrname = progname;
-			return (ptrname);
+			progname = malloc(nb * sizeof(char) + 1);
+			strncpy(progname, buffer, nb);
+			progname[nb] = '\0';
+			close(fp);
+			return (progname);
 		}
+		close(fp);
 	}
 	return (NULL);
 }
-void error(char *s)
+void error(char **s, int running)
 {
 	char *progname = program();
-	int len = _strlen(progname);
+	char errun[MAX_NUM];
 
-	if (progname == NULL)
-	{
-		printf("FUCCCK\n");
-	}
-	write(STDOUT_FILENO, progname, len);
+	_itoa(running, errun);
+	write(STDOUT_FILENO, progname, _strlen(progname));
 	write(STDOUT_FILENO, ": ", 2);
-	perror(s);
+	write(STDOUT_FILENO, errun, _strlen(errun));
+	write(STDOUT_FILENO, ": ", 2);
+	perror(*s);
+	free(progname);
 }
