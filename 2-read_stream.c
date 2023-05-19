@@ -8,7 +8,7 @@ char *read_stream(void)
 	char *lineptr = NULL;
 	size_t n = 0;
 	int len;
-	
+
 	len = getline(&lineptr, &n, stdin);
 	if (len == EOF)
 	{
