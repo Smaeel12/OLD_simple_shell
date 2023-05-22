@@ -42,6 +42,7 @@ void _itoa(int num, char *str)
 	}
 	str[i] = '\0';
 }
+
 /**
  * _getline - function that read from stdin.
  * @lineptr: the pointer where storing the buffer containing the text.
@@ -85,6 +86,25 @@ int _getline(char **lineptr, size_t *n, FILE *stream)
 	_strcpy(*lineptr, line);
 	return (0);
 }
+
+/**
+ * delim_search - compare a character from str to
+  * avaliable delimiters in delim.
+ * @c: chararcter from str.
+ * @delim: all delimiters.
+ * Return: 1 if its found. and 0 if didn't found it.
+ */
+unsigned int delim_search(char c, char *delim)
+{
+	while (*delim != '\0')
+	{
+		if (c == *delim)
+			return (1);
+		delim++;
+	}
+	return (0);
+}
+
 /**
  * _strtok - function that breaks a string into a sequence of zero or
  * more nonempty tokens.
@@ -94,8 +114,43 @@ int _getline(char **lineptr, size_t *n, FILE *stream)
  * Return: The strtok() functions return a pointer to the next token,
  * or NULL if there are no more tokens.
  */
-/*
-char *_strtok(char *str, const char *delim)
+char *_strtok(char *str, char *delim)
 {
+	static char *old_str;
+	char *portion;
+
+	if (str == NULL)
+		str = old_str;
+
+	if (str == NULL)
+		return (NULL);
+
+	while (1)
+	{
+		if (delim_search(*str, delim))
+		{
+			str++;
+			continue;
+		}
+		if (*str == '\0')
+			return (NULL);
+		break;
+	}
+	portion = str;
+
+	while (1)
+	{
+		if (*str == '\0')
+		{
+			old_str = str;
+			return (portion);
+		}
+		if (delim_search(*str, delim))
+		{
+			*str = '\0';
+			old_str = str + 1;
+			return (portion);
+		}
+		str++;
+	}
 }
-*/

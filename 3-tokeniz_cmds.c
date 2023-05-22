@@ -19,7 +19,7 @@ char **tokeniz(char *line)
 		return (NULL);
 	}
 
-	token = strtok(line, " \n");
+	token = _strtok(line, " \n");
 	while (token != NULL)
 	{
 		tokens[length] = token;
@@ -35,7 +35,7 @@ char **tokeniz(char *line)
 				return (NULL);
 			}
 		}
-		token = strtok(NULL, " \n");
+		token = _strtok(NULL, " \n");
 	}
 
 	tokens[length] = NULL;

@@ -122,8 +122,9 @@ Simple shell 0.1 +
   + You are not allowed to use getline
   + You don’t have to:
 
-7. Simple shell 0.2.1 (--on process--)
-
+7. Simple shell 0.2.1 (--completed--)
+Simple shell 0.2 +
+  + You are not allowed to use strtok
 
 8. Simple shell 0.4.1 (--completed--)
    + handle any argument to the built-in exit

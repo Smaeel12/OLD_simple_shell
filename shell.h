@@ -38,6 +38,7 @@ char *_strcat(char *dest, char *src);
 int end(char **cmd);
 char *_strcpy(char *dest, char *src);
 int env(char **cmd);
+char *_strtok(char *str, char *delim);
 
 /*---STRUCTRES---*/
 typedef struct
