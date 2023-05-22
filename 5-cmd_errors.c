@@ -33,10 +33,14 @@ char *program(void)
 
 /**
  * error - function that handle the commands errors.
+ * @status: status value.
  * @s: the command.
  * @running: the number of command been running.
+ * Description: the status value define the error should prompt
+   * 1: command errors (command not found...)
+   * 2:	exit errors (illegal number...)
  */
-void error(char *s, int running)
+void error(int status, char **s, int running)
 {
 	char *progname = program();
 	char errun[MAX_NUM];
@@ -46,6 +50,19 @@ void error(char *s, int running)
 	write(STDOUT_FILENO, ": ", 2);
 	write(STDOUT_FILENO, errun, _strlen(errun));
 	write(STDOUT_FILENO, ": ", 2);
-	perror(s);
+
+	if (status == 1)
+	{
+		perror(*s);
+	}
+	else if (status == 2)
+	{
+		char exit_err[] = "exit: Illegal number: ";
+
+		write(STDOUT_FILENO, exit_err, _strlen(exit_err));
+		write(STDOUT_FILENO, s[1], _strlen(s[1]));
+		write(STDOUT_FILENO, "\n", 1);
+	}
 	free(progname);
+
 }

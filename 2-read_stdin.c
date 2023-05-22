@@ -10,7 +10,7 @@ char *read_stdin(void)
 	int len;
 
 	len = getline(&lineptr, &n, stdin);
-	if (len == EOF )
+	if (len == EOF)
 	{
 		/* in case of “end of file” condition (Ctrl+D)*/
 		write(STDOUT_FILENO, "\n", 1);

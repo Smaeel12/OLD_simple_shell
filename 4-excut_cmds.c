@@ -1,17 +1,21 @@
 #include "shell.h"
 /**
- * excut_cmd - 
+ * excut_cmd - function that executes the program referred to by (path).
+ * @path: binary executable.
+ * @cmd: an array of pointers to strings passed to the new program
+ * as its command-line arguments.
+ * Return: On success, return 0, on error -1 is returned
  */
-void excut_cmd(char *path, char **cmd)
+int excut_cmd(char *path, char **cmd)
 {
 	int status;
 	pid_t pid = fork();
 
 	if (pid == 0)
 	{
-		execve(path, cmd, environ);
-		perror("execve");
-		exit(1);
+		status = execve(path, cmd, environ);
+		if (status == -1)
+			return (1);
 	}
 	else if (pid < 0)
 	{
@@ -23,103 +27,102 @@ void excut_cmd(char *path, char **cmd)
 		waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
+	return (0);
 }
 /**
- * access_path -
+ * access_path - function that checks whether the calling process
+ * can access the file cmd.
+ * @cmd: the file of the command.
+ * Return: On success, zero is returned. On error -1 is returned;
  */
 int access_path(const char *cmd)
 {
 	int result = access(cmd, X_OK);
-	if (result == 0)
+
+	if (result == -1)
 	{
-		return (0);
+		return (-1);
 	}
-	return (1);
+	else
+		return (0);
 }
 /**
- * find_excut - function that look for commands.
+ * find_command_path - function that look for commands.
  * @cmd: the command.
- * Return: the path to the command if it exist, and NULL if its not.
+ * Return: excutable (the path to the command if it exist),
+ * and NULL if its not.
  */
 char *find_command_path(const char *cmd)
 {
-	char *path = _getenv("PATH");
-	char *path_copy = _strdup(path);
-	char *dir;
-	char *excutable;
-	int result;
+	char *excutable = NULL;
 
-	dir = strtok(path_copy, ":");
-	while (dir != NULL)
+	if (cmd[0] == '/')
 	{
-		excutable = malloc(_strlen(dir) + _strlen(cmd) + 2);
-		sprintf(excutable, "%s/%s", dir, cmd);
-		result = access_path(excutable);
-		if (result == 0)
+		if (access_path(cmd) == 0)
 		{
-			free(path_copy);
+			excutable = _strdup((char *) cmd);
 			return (excutable);
 		}
-		free(excutable);
-		dir = strtok(NULL, ":");
 	}
-	free(path_copy);
+	else
+	{
+		char *path = _getenv("PATH");
+		char *path_copy = _strdup(path);
+		char *dir;
+
+		dir = strtok(path_copy, ":");
+		while (dir != NULL)
+		{
+			excutable = malloc(_strlen(dir) + _strlen(cmd) + 2);
+			_strcpy(excutable, dir);
+			_strcat(excutable, "/");
+			_strcat(excutable, (char *) cmd);
+			if (access_path(excutable) == 0)
+			{
+				free(path_copy);
+				return (excutable);
+			}
+			free(excutable);
+			dir = strtok(NULL, ":");
+		}
+		free(path_copy);
+	}
+
 	return (NULL);
 }
 
 /**
  * excutcmd - function that excut the commands.
  * @cmd: the commands.
- * @running: number of commands been running.
+ * Return: On success, return 0, on error 1 is returned.
  */
-void excutcmd(char **cmd, int running)
+int excutcmd(char **cmd)
 {
 	char *path;
-	int i;
+	int i, comp;
 	built_in builtin_cmds[] = {
 		{"exit", end},
+		{"env", env},
 		{NULL, NULL}
 		};
 
 	/* check if its a builtin command */
 	for (i = 0; builtin_cmds[i].name != NULL; i++)
 	{
-		i = _strncmp(cmd[0], builtin_cmds[i].name, _strlen(builtin_cmds[i].name));
-		if (i == 0)
-		{
-			builtin_cmds[i].f(cmd);
-		}
-		else
-		{
-			break;
-		}
+		comp = _strncmp(cmd[0], builtin_cmds[i].name,
+				_strlen(builtin_cmds[i].name));
+		if (comp == 0)
+			return (builtin_cmds[i].f(cmd));
 	}
 
-	/* the path of the command */
-	if (cmd[0][0] == '/')
+	path = find_command_path(cmd[0]);
+	if (path != NULL)
 	{
-		int result = access_path(cmd[0]);
-		if (result != 1)
+		if (excut_cmd(path, cmd) == 0)
 		{
-			path = cmd[0];
-			excut_cmd(path, cmd);
+			return (0);
 		}
-		else
-		{
-			error(cmd[0], running);
-		}
+		return (1);
 	}
-	else
-	{
-		path = find_command_path(cmd[0]);
-		if (path != NULL)
-		{
-			excut_cmd(path, cmd);
-		}
-		else
-		{
-			error(cmd[0], running);
-		}
-	}
-
+	return (1);
 }

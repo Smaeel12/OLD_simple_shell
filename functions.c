@@ -71,47 +71,38 @@ int _strncmp(const char *str1, const char *str2, int n)
 	}
 	return (0);
 }
-
 /**
- * _getenv - function that searches  the environment list to
-  * find the environment variable name, and returns a pointer to
-  * the corresponding value string.
- * @name: the environment variable name.
- * Return: a pointer to the corresponding value string.
+ * _strcat - function appends the src string to the dest string
+ * @dest: first string
+ * @src: second string
+ * Return: a pointer to the resulting string dest
  */
-char *_getenv(const char *name)
+char *_strcat(char *dest, char *src)
 {
-	char **env;
-	int len = _strlen(name);
+	int i = 0;
+	int r = strlen(dest);
 
-	for (env = environ; *env != NULL; ++env)
+	while (*(src + i) != '\0')
 	{
-		if (_strncmp(*env, name, len) == 0)
-			return (&(*env)[len + 1]);
+		*(dest + (r + i)) = *(src + i);
+		i++;
 	}
-	return (NULL);
+	return (dest);
 }
-
 /**
- * _itoa - function that converts an int to a string pointed to by str.
- * @str: The converted value.
- * @num: the number to convert.
+ * *_strcpy -  copies the string pointed to by src including the
+ * terminating null byte (\0), to the buffer pointed to by dest.
+ * @dest: copy to
+ * @src: copy from
+ * Return: the pointer to dest
  */
-void _itoa(int num, char *str)
+char *_strcpy(char *dest, char *src)
 {
-	int i, j;
-	char tmp;
+	int i = -1;
 
-	for (i = 0; num != 0; i++)
-	{
-		str[i] = '0' + (num % 10);
-		num /= 10;
-	}
-	for (j = 0; j < i / 2; j++)
-	{
-		tmp = str[j];
-		str[j] = str[i - j - 1];
-		str[i - j - 1] = tmp;
-	}
-	str[i] = '\0';
+	do {
+		i++;
+		*(dest + i) = *(src + i);
+	} while (*(src + i) != '\0');
+	return (dest);
 }

@@ -1,7 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 /*---MODE---*/
-void interactive_mode(int running);
+void interactive_mode(void);
 void non_interactive_mode(void);
 
 /*---MACROS---*/
@@ -26,22 +26,24 @@ extern char **environ;
 char *read_stdin(void);
 char *read_stream(void);
 char **tokeniz(char *line);
-void excutcmd(char **cmd, int running);
+int excutcmd(char **cmd);
 void errors(char *s);
 char *_strdup(char *s);
 int _strlen(const char *s);
 int _strncmp(const char *str1, const char *str2, int n);
 char *_getenv(const char *name);
-void error(char *s, int running);
+void error(int status, char **s, int running);
 void _itoa(int num, char *str);
 char *_strcat(char *dest, char *src);
-void end(char **cmd);
+int end(char **cmd);
+char *_strcpy(char *dest, char *src);
+int env(char **cmd);
 
 /*---STRUCTRES---*/
 typedef struct
 {
 	char *name;
-	void (*f)(char **cmd);
+	int (*f)(char **);
 } built_in;
 
 #endif

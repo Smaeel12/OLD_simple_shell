@@ -85,3 +85,45 @@ hsh main.c shell.c test_ls_2
 hsh main.c shell.c test_ls_2
 $
 ```
+## REAL-TIME UPDATE OF TASKS
+0. Betty would be proud
+   + beautiful code that passes the Betty checks
+
+1. Simple shell 0.1 (--completed--)
+   + Display a prompt and wait for the user to type a command. A command line always ends with a new line. 
+   + The prompt is displayed again each time a command has been executed.
+   + The command lines are simple, no semicolons, no pipes, no redirections or any other advanced features.
+   + The command lines are made only of one word. No arguments will be passed to programs.
+   + The prompt is displayed again each time a command has been executed.
+   + If an executable cannot be found, print an error message and display the prompt again.
+   + Handle errors.
+   + If an executable cannot be found, print an error message and display the prompt again.
+
+2. Simple shell 0.1 + (--completed--)
+   + Handle command lines with arguments
+
+3. Simple shell 0.2 + (--completed--)
+   + Handle the PATH
+   + fork must not be called if the command doesn’t exist.
+
+4. Simple shell 0.3 + (--completed--)
+   + Implement the exit built-in, that exits the shell
+   + Usage: exit
+
+5. Simple shell 1.0 (--completed--)
+Simple shell 0.4 +
+   + Implement the env built-in, that prints the current environment
+
+6. Simple shell 0.1.1 (--completed--)
+Simple shell 0.1 +
+  + Write your own getline function
+  + Use a buffer to read many chars at once and call the least possible the read system call
+  + You will need to use static variables
+  + You are not allowed to use getline
+  + You don’t have to:
+
+7. Simple shell 0.2.1 (--on process--)
+
+
+8. Simple shell 0.4.1 (--completed--)
+   + handle any argument to the built-in exit

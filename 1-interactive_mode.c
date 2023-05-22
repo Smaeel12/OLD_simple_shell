@@ -1,32 +1,29 @@
 #include "shell.h"
 /**
  * interactive_mode - the program in interactive mode.
- * @running: number of commands entred.
  */
-void interactive_mode(int running)
+void interactive_mode(void)
 {
 	char *line;
 	char **cmds;
+	int err_check = 0;
+	int running = 1;
 
 	while (1)
 	{
 		write(STDOUT_FILENO, "#cisfun$ ", 10);
-
 		line = read_stdin();
-		if (line == NULL)
+		if (line != NULL)
 		{
-			running++;
-			interactive_mode(running);
+			cmds = tokeniz(line);
+			err_check = excutcmd(cmds);
+			if (err_check > 0)
+			{
+				error(err_check, cmds, running);
+			}
+			free(line);
+			free(cmds);
 		}
-
-		cmds = tokeniz(line);
-		if (cmds != NULL)
-		{
-			excutcmd(cmds, running);
-		}
-
 		running++;
-		free(line);
-		free(cmds);
 	}
 }

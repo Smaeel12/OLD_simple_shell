@@ -7,9 +7,7 @@ int main(void)
 {
 	if (isatty(STDIN_FILENO) == 1)
 	{
-		int running = 1;
-
-		interactive_mode(running);
+		interactive_mode();
 	}
 	else
 	{
