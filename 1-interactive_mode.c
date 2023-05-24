@@ -1,4 +1,10 @@
 #include "shell.h"
+void signal_handler(int signal_num)
+{
+	(void)signal_num;
+	write(STDOUT_FILENO, "\n", 2);
+	write(STDOUT_FILENO, "#cisfun$ ", 10);
+}
 /**
  * interactive_mode - the program in interactive mode.
  */
@@ -9,6 +15,7 @@ void interactive_mode(void)
 	int err_check = 0;
 	int running = 1;
 
+	signal(SIGINT, signal_handler);
 	while (1)
 	{
 		write(STDOUT_FILENO, "#cisfun$ ", 10);
@@ -26,4 +33,5 @@ void interactive_mode(void)
 		}
 		running++;
 	}
+	free(line);
 }

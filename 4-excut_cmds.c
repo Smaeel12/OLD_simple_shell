@@ -74,6 +74,11 @@ char *find_command_path(const char *cmd)
 		while (dir != NULL)
 		{
 			excutable = malloc(_strlen(dir) + _strlen(cmd) + 2);
+			if (excutable == NULL)
+			{
+				free(excutable);
+				return (NULL);
+			}
 			_strcpy(excutable, dir);
 			_strcat(excutable, "/");
 			_strcat(excutable, (char *) cmd);
@@ -120,8 +125,10 @@ int excutcmd(char **cmd)
 	{
 		if (excut_cmd(path, cmd) == 0)
 		{
+			free(path);
 			return (0);
 		}
+		free(path);
 		return (1);
 	}
 	return (1);

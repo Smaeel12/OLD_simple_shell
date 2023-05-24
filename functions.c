@@ -29,8 +29,8 @@ char *_strdup(char *str)
 		for (i = 0; i < len; i++)
 			newstr[i] = str[i];
 		newstr[len] = '\0';
-		return (newstr);
 	}
+	return  (newstr);
 }
 
 /**
@@ -42,7 +42,7 @@ int _strlen(const char *s)
 {
 	int len = 0;
 
-	while (s[len] != 0)
+	while (s[len] != '\0')
 		len++;
 	return (len);
 }
@@ -80,13 +80,14 @@ int _strncmp(const char *str1, const char *str2, int n)
 char *_strcat(char *dest, char *src)
 {
 	int i = 0;
-	int r = strlen(dest);
+	int r = _strlen(dest);
 
 	while (*(src + i) != '\0')
 	{
 		*(dest + (r + i)) = *(src + i);
 		i++;
 	}
+	*(dest + (r + i)) = '\0';
 	return (dest);
 }
 /**

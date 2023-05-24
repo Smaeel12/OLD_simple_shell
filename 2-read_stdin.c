@@ -1,4 +1,17 @@
 #include "shell.h"
+int space_check(char *line)
+{
+	int i;
+
+	for(i = 0; line[i] != '\n'; i++)
+	{
+		if(line[i] != ' ' && line[i] != '\t')
+		{
+			return (0);
+		}
+	}
+	return (1);
+}
 /**
  * read_stdin - read a line from the stdin.
  * Return: pointer points to the line.
@@ -15,7 +28,7 @@ char *read_stdin(void)
 		/* in case of “end of file” condition (Ctrl+D)*/
 		write(STDOUT_FILENO, "\n", 1);
 		free(lineptr);
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
 	if (len == -1)
 	{
@@ -23,8 +36,9 @@ char *read_stdin(void)
 		exit(EXIT_FAILURE);
 	}
 
-	if (*lineptr == '\n')
+	if (space_check(lineptr) == 1)
 	{
+		free(lineptr);
 		/* in case of empty line (nothing been entred)*/
 		return (NULL);
 	}
