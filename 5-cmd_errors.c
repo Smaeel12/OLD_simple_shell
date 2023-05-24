@@ -53,7 +53,11 @@ void error(int status, char **s, int running)
 
 	if (status == 1)
 	{
-		perror(*s);
+		char err[] = ": not found";
+
+		write(STDOUT_FILENO, s[0], _strlen(s[0]));
+		write(STDOUT_FILENO, err, _strlen(err));
+		write(STDOUT_FILENO, "\n", 1);
 	}
 	else if (status == 2)
 	{
