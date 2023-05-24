@@ -117,7 +117,9 @@ int excutcmd(char **cmd)
 		comp = _strncmp(cmd[0], builtin_cmds[i].name,
 				_strlen(builtin_cmds[i].name));
 		if (comp == 0)
+		{
 			return (builtin_cmds[i].f(cmd));
+		}
 	}
 
 	path = find_command_path(cmd[0]);

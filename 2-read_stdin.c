@@ -1,10 +1,10 @@
 #include "shell.h"
 /**
- * space_check - function that check for spaces.
+ * line_check - function that check for spaces.
  * @line: read line.
  * Return: 0 foound a character, 1 Null line.
  */
-int space_check(char *line)
+int line_check(char *line)
 {
 	int i;
 
@@ -41,7 +41,7 @@ char *read_stdin(void)
 		exit(EXIT_FAILURE);
 	}
 
-	if (space_check(lineptr) == 1)
+	if (line_check(lineptr) == 1)
 	{
 		free(lineptr);
 		/* in case of empty line (nothing been entred)*/
