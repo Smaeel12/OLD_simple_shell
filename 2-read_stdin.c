@@ -1,11 +1,16 @@
 #include "shell.h"
+/**
+ * space_check - function that check for spaces.
+ * @line: read line.
+ * Return: 0 foound a character, 1 Null line.
+ */
 int space_check(char *line)
 {
 	int i;
 
-	for(i = 0; line[i] != '\n'; i++)
+	for (i = 0; line[i] != '\n'; i++)
 	{
-		if(line[i] != ' ' && line[i] != '\t')
+		if (line[i] != ' ' && line[i] != '\t')
 		{
 			return (0);
 		}

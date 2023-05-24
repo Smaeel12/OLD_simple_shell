@@ -1,4 +1,8 @@
 #include "shell.h"
+/**
+ * signal_handler - function that terminal signals.
+ * @signal_num: signal number.
+ */
 void signal_handler(int signal_num)
 {
 	(void)signal_num;
