@@ -7,7 +7,7 @@ void non_interactive_mode(void);
 /*---MACROS---*/
 extern char **environ;
 #define MAX_NUM 10
-#define MAX_LENGHT 256 
+#define MAX_LENGHT 256
 #define BUFFER_SIZE 1024
 
 /*---LIBRARIES---*/
@@ -41,7 +41,12 @@ int env(char **cmd);
 char *_strtok(char *str, char *delim);
 
 /*---STRUCTRES---*/
-typedef struct
+/**
+ * struct built - structure for builtins.
+ * @name: name of the builtin.
+ * @f: function prototype.
+ */
+typedef struct built
 {
 	char *name;
 	int (*f)(char **);
