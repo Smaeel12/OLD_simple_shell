@@ -70,7 +70,7 @@ char *find_command_path(const char *cmd)
 		char *path_copy = _strdup(path);
 		char *dir;
 
-		dir = strtok(path_copy, ":");
+		dir = _strtok(path_copy, ":");
 		while (dir != NULL)
 		{
 			excutable = malloc(_strlen(dir) + _strlen(cmd) + 2);
@@ -88,7 +88,7 @@ char *find_command_path(const char *cmd)
 				return (excutable);
 			}
 			free(excutable);
-			dir = strtok(NULL, ":");
+			dir = _strtok(NULL, ":");
 		}
 		free(path_copy);
 	}

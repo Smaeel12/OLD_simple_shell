@@ -2,7 +2,7 @@
 /**
  * non_interactive_mode - the program in the non interactive mode.
  */
-void non_interactive_mode(void)
+void non_interactive_mode(char *progname)
 {
 	char *line;
 	char **cmds;
@@ -16,7 +16,7 @@ void non_interactive_mode(void)
 		err_check = excutcmd(cmds);
 		if (err_check > 0)
 		{
-			error(err_check, cmds, running);
+			error(progname, err_check, cmds, running);
 		}
 	}
 	free(line);

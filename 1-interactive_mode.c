@@ -12,7 +12,7 @@ void signal_handler(int signal_num)
 /**
  * interactive_mode - the program in interactive mode.
  */
-void interactive_mode(void)
+void interactive_mode(char *progname)
 {
 	char *line;
 	char **cmds;
@@ -30,7 +30,7 @@ void interactive_mode(void)
 			err_check = excutcmd(cmds);
 			if (err_check > 0)
 			{
-				error(err_check, cmds, running);
+				error(progname, err_check, cmds, running);
 			}
 			free(line);
 			free(cmds);

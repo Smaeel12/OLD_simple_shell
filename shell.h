@@ -1,8 +1,8 @@
 #ifndef SHELL_H
 #define SHELL_H
 /*---MODE---*/
-void interactive_mode(void);
-void non_interactive_mode(void);
+void interactive_mode(char *progname);
+void non_interactive_mode(char *progname);
 
 /*---MACROS---*/
 extern char **environ;
@@ -32,13 +32,14 @@ char *_strdup(char *s);
 int _strlen(const char *s);
 int _strncmp(const char *str1, const char *str2, int n);
 char *_getenv(const char *name);
-void error(int status, char **s, int running);
+void error(char *progname, int status, char **s, int running);
 void _itoa(int num, char *str);
 char *_strcat(char *dest, char *src);
 int end(char **cmd);
 char *_strcpy(char *dest, char *src);
 int env(char **cmd);
 char *_strtok(char *str, char *delim);
+int _getline(char **lineptr, size_t *n, FILE *stream);
 
 /*---STRUCTRES---*/
 /**
