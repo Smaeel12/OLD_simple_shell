@@ -17,7 +17,19 @@ void non_interactive_mode(char *progname)
 		err_check = excutcmd(cmds);
 		if (err_check > 0)
 		{
-			error(progname, err_check, cmds, running);
+			switch (err_check)
+			{
+				case 1:
+					exit(2);
+					break;
+				case 2:
+					error(progname, err_check, cmds, running);
+					exit(127);
+					break;
+				default:
+					exit(0);
+					break;
+			}
 		}
 		free(line);
 		free(cmds);

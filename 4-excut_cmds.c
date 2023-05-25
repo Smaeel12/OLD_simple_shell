@@ -9,12 +9,13 @@
 int excut_cmd(char *path, char **cmd)
 {
 	int status;
+	int exec_rtn;
 	pid_t pid = fork();
 
 	if (pid == 0)
 	{
-		status = execve(path, cmd, environ);
-		if (status == -1)
+		exec_rtn = execve(path, cmd, environ);
+		if (exec_rtn == -1)
 			return (1);
 	}
 	else if (pid < 0)
@@ -27,6 +28,8 @@ int excut_cmd(char *path, char **cmd)
 		waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
+	if (status > 0)
+		return (1);
 	return (0);
 }
 /**
@@ -96,7 +99,9 @@ char *find_command_path(const char *cmd)
 /**
  * excutcmd - function that excut the commands.
  * @cmd: the commands.
- * Return: On success, return 0, on error 1 is returned.
+ * Return: On succes: return 0, 
+          * command not found: 1 is returned.
+	  * command failed: 2 is returned
  */
 int excutcmd(char **cmd)
 {
@@ -130,5 +135,5 @@ int excutcmd(char **cmd)
 		free(path);
 		return (1);
 	}
-	return (1);
+	return (2);
 }

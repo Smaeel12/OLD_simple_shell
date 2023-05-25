@@ -11,12 +11,12 @@ int end(char **cmd)
 {
 	if (cmd[1] != NULL)
 	{
-		int n = atoi(cmd[1]);
+		int exit_num = atoi(cmd[1]);
 
-		if (n == 0 && *cmd[1] != '0')
+		if (exit_num == 0 && *cmd[1] != '0')
 			return (2);
 		free(cmd);
-		exit(n);
+		exit(exit_num);
 	}
 	free(cmd);
 	exit(EXIT_SUCCESS);
