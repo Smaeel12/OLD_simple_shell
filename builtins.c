@@ -26,26 +26,32 @@ int end(char **cmd)
  * @cmd: the env command.
  * Return: 0 àn success.
  */
-int env(char **cmd)
+int env_print(char **cmd)
 {
-	int i;
-	char *env_var;
-	char *vars[] = {"USER", "LANGUAGE", "SESSION", "COMPIZ_CONFIG_PROFILE",
-		"SHLVL", "HOME", "C_IS", "DESKTOP_SESSION",
-		"LOGNAME", "TERM", "PATH", "DISPLAY", NULL};
+	int count = 0;
+	char **env = environ;
+	char **envArray = NULL;
+	int i, j;
 
-	for (i = 0; vars[i] != NULL; i++)
+
+	while (*env != NULL)
 	{
-		env_var = _getenv(vars[i]);
-		if (env_var != NULL)
-		{
-			write(STDOUT_FILENO, vars[i], _strlen(vars[i]));
-			write(STDOUT_FILENO, "=", 1);
-			write(STDOUT_FILENO, env_var, _strlen(env_var));
-			write(STDOUT_FILENO, "\n", 1);
-
-		}
+		count++;
+		env++;
 	}
+	envArray = malloc((count + 1) * sizeof(char *));
+	env = environ;
+
+	for (i = 0; i < count; i++)
+	{
+		envArray[i] = *env;
+		env++;
+	}
+	envArray[count] = NULL;
+	for (j = count - 1; j >= 0; j--)
+		printf("%s\n", envArray[j]);
+
+	free(envArray);
 	*cmd = NULL;
 	return (0);
 }

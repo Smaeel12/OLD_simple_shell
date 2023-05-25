@@ -37,7 +37,7 @@ void _itoa(int num, char *str);
 char *_strcat(char *dest, char *src);
 int end(char **cmd);
 char *_strcpy(char *dest, char *src);
-int env(char **cmd);
+int env_print(char **cmd);
 char *_strtok(char *str, char *delim);
 int _getline(char **lineptr, size_t *n, FILE *stream);
 int line_check(char *line);

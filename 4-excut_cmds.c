@@ -109,7 +109,7 @@ int excutcmd(char **cmd)
 	int i, comp;
 	built_in builtin_cmds[] = {
 		{"exit", end},
-		{"env", env},
+		{"env", env_print},
 		{NULL, NULL}
 		};
 
