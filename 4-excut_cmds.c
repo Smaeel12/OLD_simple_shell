@@ -56,13 +56,10 @@ char *find_command_path(const char *cmd)
 {
 	char *excutable = NULL;
 
-	if (cmd[0] == '/')
+	if (access_path(cmd) == 0)
 	{
-		if (access_path(cmd) == 0)
-		{
-			excutable = _strdup((char *) cmd);
-			return (excutable);
-		}
+		excutable = _strdup((char *) cmd);
+		return (excutable);
 	}
 	else
 	{

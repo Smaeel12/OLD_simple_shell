@@ -40,6 +40,7 @@ char *_strcpy(char *dest, char *src);
 int env(char **cmd);
 char *_strtok(char *str, char *delim);
 int _getline(char **lineptr, size_t *n, FILE *stream);
+int line_check(char *line);
 
 /*---STRUCTRES---*/
 /**

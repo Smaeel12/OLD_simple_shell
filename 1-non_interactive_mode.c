@@ -5,7 +5,7 @@
  */
 void non_interactive_mode(char *progname)
 {
-	char *line;
+	char *line = NULL;
 	char **cmds;
 	int err_check = 0;
 	int running = 1;
@@ -19,7 +19,7 @@ void non_interactive_mode(char *progname)
 		{
 			error(progname, err_check, cmds, running);
 		}
+		free(line);
+		free(cmds);
 	}
-	free(line);
-	free(cmds);
 }

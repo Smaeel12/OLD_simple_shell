@@ -10,15 +10,10 @@ char *read_stream(void)
 	int len;
 
 	len = getline(&lineptr, &n, stdin);
-	if (len == EOF)
+	if (len == -1 || line_check(lineptr) == 1)
 	{
 		free(lineptr);
-		exit(EXIT_FAILURE);
-	}
-	if (len == -1)
-	{
-		perror("getline: ");
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
 	return (lineptr);
 }

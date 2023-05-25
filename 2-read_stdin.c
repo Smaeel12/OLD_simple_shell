@@ -35,11 +35,6 @@ char *read_stdin(void)
 		free(lineptr);
 		exit(EXIT_SUCCESS);
 	}
-	if (len == -1)
-	{
-		perror("getline: ");
-		exit(EXIT_FAILURE);
-	}
 
 	if (line_check(lineptr) == 1)
 	{
