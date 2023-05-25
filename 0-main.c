@@ -1,6 +1,8 @@
 #include "shell.h"
 /**
  * main - run the program.
+ * @ac: argument count.
+ * @av: argument vector.
  * Return: 0 always.
  */
 int main(int ac, char **av)

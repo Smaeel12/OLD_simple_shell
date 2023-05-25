@@ -1,6 +1,7 @@
 #include "shell.h"
 /**
  * error - function that handle the commands errors.
+ * @progname: program name.
  * @status: status value.
  * @s: the command.
  * @running: the number of command been running.

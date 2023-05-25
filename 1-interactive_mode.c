@@ -11,6 +11,7 @@ void signal_handler(int signal_num)
 }
 /**
  * interactive_mode - the program in interactive mode.
+ * @progname: program name.
  */
 void interactive_mode(char *progname)
 {

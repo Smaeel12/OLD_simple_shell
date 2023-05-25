@@ -1,6 +1,7 @@
 #include "shell.h"
 /**
  * non_interactive_mode - the program in the non interactive mode.
+ * @progname: program name.
  */
 void non_interactive_mode(char *progname)
 {
