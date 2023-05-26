@@ -32,7 +32,7 @@ char *_strdup(char *s);
 int _strlen(const char *s);
 int _strncmp(const char *str1, const char *str2, int n);
 char *_getenv(const char *name);
-void error(char *progname, int status, char **s, int running);
+void im_error(char *progname, int status, char **s, int running);
 void _itoa(int num, char *str);
 char *_strcat(char *dest, char *src);
 int end(char *line, char **cmd);
@@ -41,6 +41,7 @@ int env_print(char *line, char **cmd);
 char *_strtok(char *str, char *delim);
 int _getline(char **lineptr, size_t *n, FILE *stream);
 int line_check(char *line);
+void nim_error(char *progname, int status,char *line, char **s, int running);
 
 /*---STRUCTRES---*/
 /**

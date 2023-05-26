@@ -19,10 +19,8 @@ void non_interactive_mode(char *progname)
 			err_check = excutcmd(line, cmds);
 			if (err_check > 0)
 			{
-				error(progname, err_check, cmds, running);
+				nim_error(progname, err_check, line, cmds, running);
 			}
-			free(line);
-			free(cmds);
 		}
 	}
 }

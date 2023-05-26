@@ -98,6 +98,7 @@ char *find_command_path(const char *cmd)
 
 /**
  * excutcmd - function that excut the commands.
+ * @line: command line.
  * @cmd: the commands.
  * Return: On succes: return 0,
 	* command excute failed: 1 is returned.

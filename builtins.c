@@ -3,6 +3,7 @@
 /**
  * end - function causes normal process termination and exit the program,
  * and write exit status on success
+ * @line: command line.
  * @cmd: normal process.
  * Return: On Success nothing returned. return 3 in failure
  * as status to error() function in case of invalid exit status
@@ -25,6 +26,7 @@ int end(char *line, char **cmd)
 }
 /**
  * env_print - function that Display environment variables.
+ * @line: command line.
  * @cmd: the env command.
  * Return: 0 àn success.
  */

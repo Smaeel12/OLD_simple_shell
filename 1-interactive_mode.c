@@ -31,7 +31,7 @@ void interactive_mode(char *progname)
 			err_check = excutcmd(line, cmds);
 			if (err_check > 0)
 			{
-				error(progname, err_check, cmds, running);
+				im_error(progname, err_check, cmds, running);
 			}
 			free(line);
 			free(cmds);
