@@ -21,6 +21,8 @@ void non_interactive_mode(char *progname)
 			{
 				nim_error(progname, err_check, line, cmds, running);
 			}
+			free(line);
+			free(cmds);
 		}
 	}
 }

@@ -41,7 +41,7 @@ int env_print(char *line, char **cmd);
 char *_strtok(char *str, char *delim);
 int _getline(char **lineptr, size_t *n, FILE *stream);
 int line_check(char *line);
-void nim_error(char *progname, int status,char *line, char **s, int running);
+void nim_error(char *progname, int status, char *line, char **s, int running);
 
 /*---STRUCTRES---*/
 /**

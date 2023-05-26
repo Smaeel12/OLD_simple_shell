@@ -39,4 +39,5 @@ void interactive_mode(char *progname)
 		running++;
 	}
 	free(line);
+	free(cmds);
 }
