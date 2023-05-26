@@ -99,9 +99,10 @@ char *find_command_path(const char *cmd)
 /**
  * excutcmd - function that excut the commands.
  * @cmd: the commands.
- * Return: On succes: return 0, 
-          * command not found: 1 is returned.
-	  * command failed: 2 is returned
+ * Return: On succes: return 0,
+	* command excute failed: 1 is returned.
+	* command not found: 2 is returned.
+	* builtin failed: case exit return 3.
  */
 int excutcmd(char **cmd)
 {

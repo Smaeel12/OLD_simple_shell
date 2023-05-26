@@ -13,25 +13,16 @@ void non_interactive_mode(char *progname)
 	while (1)
 	{
 		line = read_stream();
-		cmds = tokeniz(line);
-		err_check = excutcmd(cmds);
-		if (err_check > 0)
+		if (line != NULL)
 		{
-			switch (err_check)
+			cmds = tokeniz(line);
+			err_check = excutcmd(cmds);
+			if (err_check > 0)
 			{
-				case 1:
-					exit(2);
-					break;
-				case 2:
-					error(progname, err_check, cmds, running);
-					exit(127);
-					break;
-				default:
-					exit(0);
-					break;
+				error(progname, err_check, cmds, running);
 			}
+			free(line);
+			free(cmds);
 		}
-		free(line);
-		free(cmds);
 	}
 }

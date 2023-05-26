@@ -4,7 +4,7 @@
  * end - function causes normal process termination and exit the program,
  * and write exit status on success
  * @cmd: normal process.
- * Return: On Success nothing returned. return 2 in failure
+ * Return: On Success nothing returned. return 3 in failure
  * as status to error() function in case of invalid exit status
  */
 int end(char **cmd)
@@ -13,8 +13,8 @@ int end(char **cmd)
 	{
 		int exit_num = atoi(cmd[1]);
 
-		if (exit_num == 0 && *cmd[1] != '0')
-			return (2);
+		if (exit_num < 0 || (exit_num == 0 && *cmd[1] != '0'))
+			return (3);
 		free(cmd);
 		exit(exit_num);
 	}
@@ -22,36 +22,19 @@ int end(char **cmd)
 	exit(EXIT_SUCCESS);
 }
 /**
- * env - function that Display environment variables.
+ * env_print - function that Display environment variables.
  * @cmd: the env command.
  * Return: 0 àn success.
  */
 int env_print(char **cmd)
 {
-	int count = 0;
-	char **env = environ;
-	char **envArray = NULL;
-	int i, j;
+	int i;
+	char **vars = environ;
 
-
-	while (*env != NULL)
+	for (i = 0; vars[i] != NULL; i++)
 	{
-		count++;
-		env++;
+		printf("%s\n", vars[i]);
 	}
-	envArray = malloc((count + 1) * sizeof(char *));
-	env = environ;
-
-	for (i = 0; i < count; i++)
-	{
-		envArray[i] = *env;
-		env++;
-	}
-	envArray[count] = NULL;
-	for (j = count - 1; j >= 0; j--)
-		printf("%s\n", envArray[j]);
-
-	free(envArray);
 	*cmd = NULL;
 	return (0);
 }

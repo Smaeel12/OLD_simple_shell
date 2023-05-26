@@ -10,10 +10,15 @@ char *read_stream(void)
 	int len;
 
 	len = getline(&lineptr, &n, stdin);
-	if (len == -1 || line_check(lineptr) == 1)
+	if (len == -1)
 	{
 		free(lineptr);
 		exit(EXIT_SUCCESS);
+	}
+	if (line_check(lineptr) == 1)
+	{
+		free(lineptr);
+		return (NULL);
 	}
 	return (lineptr);
 }
