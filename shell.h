@@ -26,7 +26,7 @@ extern char **environ;
 char *read_stdin(void);
 char *read_stream(void);
 char **tokeniz(char *line);
-int excutcmd(char **cmd);
+int excutcmd(char *line, char **cmd);
 void errors(char *s);
 char *_strdup(char *s);
 int _strlen(const char *s);
@@ -35,9 +35,9 @@ char *_getenv(const char *name);
 void error(char *progname, int status, char **s, int running);
 void _itoa(int num, char *str);
 char *_strcat(char *dest, char *src);
-int end(char **cmd);
+int end(char *line, char **cmd);
 char *_strcpy(char *dest, char *src);
-int env_print(char **cmd);
+int env_print(char *line, char **cmd);
 char *_strtok(char *str, char *delim);
 int _getline(char **lineptr, size_t *n, FILE *stream);
 int line_check(char *line);
@@ -51,7 +51,7 @@ int line_check(char *line);
 typedef struct built
 {
 	char *name;
-	int (*f)(char **);
+	int (*f)(char *, char **);
 } built_in;
 
 #endif

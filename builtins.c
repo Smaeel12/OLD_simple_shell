@@ -7,7 +7,7 @@
  * Return: On Success nothing returned. return 3 in failure
  * as status to error() function in case of invalid exit status
  */
-int end(char **cmd)
+int end(char *line, char **cmd)
 {
 	if (cmd[1] != NULL)
 	{
@@ -16,9 +16,11 @@ int end(char **cmd)
 		if (exit_num < 0 || (exit_num == 0 && *cmd[1] != '0'))
 			return (3);
 		free(cmd);
+		free(line);
 		exit(exit_num);
 	}
 	free(cmd);
+	free(line);
 	exit(EXIT_SUCCESS);
 }
 /**
@@ -26,10 +28,11 @@ int end(char **cmd)
  * @cmd: the env command.
  * Return: 0 àn success.
  */
-int env_print(char **cmd)
+int env_print(char *line, char **cmd)
 {
 	int i;
 	char **vars = environ;
+	(void)line;
 
 	for (i = 0; vars[i] != NULL; i++)
 	{

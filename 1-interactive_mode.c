@@ -28,7 +28,7 @@ void interactive_mode(char *progname)
 		if (line != NULL)
 		{
 			cmds = tokeniz(line);
-			err_check = excutcmd(cmds);
+			err_check = excutcmd(line, cmds);
 			if (err_check > 0)
 			{
 				error(progname, err_check, cmds, running);

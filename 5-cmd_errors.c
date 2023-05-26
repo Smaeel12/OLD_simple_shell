@@ -13,10 +13,16 @@ void error(char *progname, int status, char **s, int running)
 {
 	char errun[MAX_NUM];
 
-	if (!isatty(STDIN_FILENO) && status == 1)
+	if (status == 1)
 	{
-		exit(2);
+		if (!isatty(STDIN_FILENO))
+		{
+			exit(2);
+		}
+		errno = 2;
 	}
+	if (status == 2 || status == 3)
+	{
 	_itoa(running, errun);
 	write(STDERR_FILENO, progname, _strlen(progname));
 	write(STDERR_FILENO, ": ", 2);
@@ -33,6 +39,7 @@ void error(char *progname, int status, char **s, int running)
 		{
 			exit(127);
 		}
+		errno = 127;
 	}
 	else if (status == 3)
 	{
@@ -45,5 +52,7 @@ void error(char *progname, int status, char **s, int running)
 		{
 			exit(2);
 		}
+		errno = 2;
+	}
 	}
 }

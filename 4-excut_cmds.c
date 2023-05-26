@@ -104,7 +104,7 @@ char *find_command_path(const char *cmd)
 	* command not found: 2 is returned.
 	* builtin failed: case exit return 3.
  */
-int excutcmd(char **cmd)
+int excutcmd(char *line, char **cmd)
 {
 	char *path;
 	int i, comp;
@@ -121,7 +121,7 @@ int excutcmd(char **cmd)
 				_strlen(builtin_cmds[i].name));
 		if (comp == 0)
 		{
-			return (builtin_cmds[i].f(cmd));
+			return (builtin_cmds[i].f(line, cmd));
 		}
 	}
 
